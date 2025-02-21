@@ -27,3 +27,9 @@ async def create_user(user):
     user_data = {"username":user.username, "password":hash_password}
     await db.users.insert_one(user_data)
     return {"message": "User Created Successfully"}
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY , algorithm=ALGORITHM)
