@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-import { Mail, Lock, User } from 'lucide-react';
+import { Lock, User } from 'lucide-react';
 
 interface AuthFormProps {
   onSubmit: (username: string, password: string) => void;
