@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
-from models.user import UserCreate, UserLogin
-from services.auth import authenticate_user, create_access_token, create_user
+from backend.app.models.user import UserCreate, UserLogin
+from backend.app.services.auth import authenticate_user, create_access_token, create_user
 
 router = APIRouter()
 
@@ -12,6 +12,6 @@ async def register(user: UserCreate):
 async def login(user: UserLogin):
     user_data = await authenticate_user(user.username, user.password)
     if not user_data:
-        raise HTTPException(status_code=401, detail="Invalid Creds")
+        raise HTTPException(status_code=401, detail="Invalid Credentials")
     access_token = create_access_token({"sub": user.username})
     return {"access_token": access_token}
